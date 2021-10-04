@@ -256,4 +256,9 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionTekber()
+    {
+        return $this->render('tekber');
+    }
 }
