@@ -27,11 +27,9 @@ class Fakultas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'integer'],
             [['kode'], 'string', 'max' => 10],
             [['nama'], 'string', 'max' => 50],
-            [['id'], 'unique'],
+            [['kode', 'nama'], 'required'],
         ];
     }
 
