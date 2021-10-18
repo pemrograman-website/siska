@@ -23,7 +23,7 @@ use kartik\select2\Select2;
 
     $data = Fakultas::fakultasList();           // Array daftar fakultas: id => nama
 
-    echo $form->field($model, 'fakultas_id')->widget(Select2::className(), [
+    echo $form->field($model, 'fakultas_id')->widget(Select2::class, [
         'data' => $data,
         // 'theme' => Select2::THEME_KRAJEE, // this is the default if theme is not set
         'options' => ['placeholder' => 'Pilih fakultas...'],
