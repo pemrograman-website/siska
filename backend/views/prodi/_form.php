@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use backend\models\Fakultas;
+
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Prodi */
@@ -16,8 +19,19 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fakultas_id')->textInput() ?>
+    <?php
 
+    $data = Fakultas::fakultasList();           // Array daftar fakultas: id => nama
+
+    echo $form->field($model, 'fakultas_id')->widget(Select2::className(), [
+        'data' => $data,
+        // 'theme' => Select2::THEME_KRAJEE, // this is the default if theme is not set
+        'options' => ['placeholder' => 'Pilih fakultas...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    ?>
 
     <?php if (!Yii::$app->request->isAjax) { ?>
         <div class="form-group">
