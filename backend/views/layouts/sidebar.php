@@ -35,19 +35,39 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
-                        'items' => [
-                            ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                        ]
-                    ],
-                    ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
+                    // [
+                    //     'label' => 'Starter Pages',
+                    //     'icon' => 'tachometer-alt',
+                    //     'badge' => '<span class="right badge badge-info">2</span>',
+                    //     'items' => [
+                    //         ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
+                    //         ['label' => 'Inactive Page', 'iconStyle' => 'far'],
+                    //     ]
+                    // ],
+                    // ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
+                    ['label' => 'ADMIN', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+                    ['label' => 'Agama',  'icon' => 'file-code', 'url' => ['/agama']],
+
+
+                    ['label' => 'AKADEMIK', 'header' => true],
+                    ['label' => 'Fakultas', 'url' => ['/fakultas'], 'icon' => 'sign-in-alt'],
+                    ['label' => 'Prodi',  'icon' => 'file-code', 'url' => ['/prodi']],
+                    ['label' => 'Gedung',  'icon' => 'file-code', 'url' => ['/gedung']],
+                    ['label' => 'Mahasiswa', 'url' => ['/mahasiswa'], 'icon' => 'sign-in-alt'],
+                    ['label' => 'Dosen', 'url' => ['/dosen'], 'icon' => 'sign-in-alt'],
+
+
+                    ['label' => 'MAHASISWA', 'header' => true],
+                    ['label' => 'Ubah Profil', 'url' => ['site/login'], 'icon' => 'sign-in-alt'],
+                    ['label' => 'Ambil Kelas',  'icon' => 'file-code', 'url' => ['/gii']],
+                    ['label' => 'Cetak KHS',  'icon' => 'file-code', 'url' => ['/gii']],
+
+
+                    ['label' => 'DOSEN', 'header' => true],
+                    ['label' => 'Ubah Profil', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
+
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
                     ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
                     ['label' => 'Level1'],
