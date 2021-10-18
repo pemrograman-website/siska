@@ -28,8 +28,8 @@ class Prodi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['prodi_id', 'fakultas_id'], 'required'],
-            [['prodi_id', 'fakultas_id'], 'integer'],
+            [['fakultas_id', 'kode', 'nama'], 'required'],
+            [['fakultas_id'], 'integer'],
             [['kode'], 'string', 'max' => 10],
             [['nama'], 'string', 'max' => 50],
             [['prodi_id'], 'unique'],
