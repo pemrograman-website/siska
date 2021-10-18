@@ -9,7 +9,15 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-
+        'i18n' => [
+            'translations' => [
+                'yii2-ajaxcrud' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2ajaxcrud/ajaxcrud/messages',
+                    'sourceLanguage' => 'id',
+                ],
+            ]
+        ]
     ],
     'language' => 'id-ID',
 ];
