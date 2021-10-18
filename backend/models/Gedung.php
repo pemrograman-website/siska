@@ -29,6 +29,7 @@ class Gedung extends \yii\db\ActiveRecord
         return [
             [['kode'], 'string', 'max' => 10],
             [['nama'], 'string', 'max' => 45],
+            [['kode', 'nama'], 'required'],
         ];
     }
 
