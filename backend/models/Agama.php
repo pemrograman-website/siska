@@ -27,6 +27,7 @@ class Agama extends \yii\db\ActiveRecord
     {
         return [
             [['nama'], 'string', 'max' => 45],
+            [['nama'], 'required'],
         ];
     }
 
