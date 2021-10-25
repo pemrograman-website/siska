@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 
 use kartik\grid\GridView;
-use backend\models\Fakultas;
+use backend\models\FakultasSearch;
 
 return [
     [
@@ -28,7 +28,7 @@ return [
         'value' => 'fakultas.nama',
         'label' => 'Fakultas',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter' => Fakultas::fakultasList(),
+        'filter' => FakultasSearch::fakultasList(),
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
             'hideSearch' => true,
