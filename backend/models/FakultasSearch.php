@@ -5,6 +5,9 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
+
 use backend\models\Fakultas;
 
 /**
@@ -63,5 +66,20 @@ class FakultasSearch extends Fakultas
             ->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
+    }
+
+    // Mengembalikan daftar fakultas untuk Select2
+    public static function fakultasList()
+    {
+        $query = new Query;
+
+        $query->from('fakultas');
+        $query->orderBy([
+            'nama' => SORT_ASC,
+        ]);
+
+        $list = $query->all();
+
+        return ArrayHelper::map($list, 'id', 'nama');
     }
 }

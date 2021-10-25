@@ -3,8 +3,7 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\Query;
-use yii\helpers\ArrayHelper;
+
 
 /**
  * This is the model class for table "fakultas".
@@ -45,20 +44,5 @@ class Fakultas extends \yii\db\ActiveRecord
             'kode' => 'Kode',
             'nama' => 'Nama',
         ];
-    }
-
-    // Mengembalikan daftar fakultas
-    public static function fakultasList()
-    {
-        $query = new Query;
-
-        $query->from('fakultas');
-        $query->orderBy([
-            'nama' => SORT_ASC,
-        ]);
-
-        $list = $query->all();
-
-        return ArrayHelper::map($list, 'id', 'nama');
     }
 }
