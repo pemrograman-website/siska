@@ -48,4 +48,10 @@ class Prodi extends \yii\db\ActiveRecord
             'fakultas_id' => 'Fakultas ID',
         ];
     }
+
+    // Fungsi relasi yang menghubungkan Prodi dengan Fakultas yang
+    public function getFakultas()            // Relasi many to one
+    {
+        return $this->hasOne(Fakultas::class, ['id' => 'fakultas_id']);
+    }
 }

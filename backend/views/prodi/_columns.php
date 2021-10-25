@@ -22,6 +22,7 @@ return [
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'fakultas_id',
+        'value' => 'fakultas.nama',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
