@@ -48,13 +48,25 @@
                     ['label' => 'ADMIN', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Agama',  'icon' => 'file-code', 'url' => ['/agama']],
+
 
 
                     ['label' => 'AKADEMIK', 'header' => true],
-                    ['label' => 'Fakultas', 'url' => ['/fakultas'], 'icon' => 'sign-in-alt'],
-                    ['label' => 'Prodi',  'icon' => 'file-code', 'url' => ['/prodi']],
-                    ['label' => 'Gedung',  'icon' => 'file-code', 'url' => ['/gedung']],
+                    [
+                        'label' => 'Data Master',
+                        'items' => [
+                            ['label' => 'Fakultas', 'url' => ['/fakultas'], 'icon' => 'sign-in-alt'],
+                            ['label' => 'Program Studi',  'icon' => 'file-code', 'url' => ['/prodi']],
+                            ['label' => 'Status Dosen',  'icon' => 'file-code', 'url' => ['/status-dosen']],
+                            ['label' => 'Universitas',  'icon' => 'file-code', 'url' => ['/universitas']],
+                            ['label' => 'Agama',  'icon' => 'file-code', 'url' => ['/agama']],
+                            ['label' => 'Pendidikan Terakhir',  'icon' => 'file-code', 'url' => ['/pendidikan-terakhir']],
+                            ['label' => 'Gedung',  'icon' => 'file-code', 'url' => ['/gedung']],
+
+
+                        ]
+                    ],
+
                     ['label' => 'Mahasiswa', 'url' => ['/mahasiswa'], 'icon' => 'sign-in-alt'],
                     ['label' => 'Dosen', 'url' => ['/dosen'], 'icon' => 'sign-in-alt'],
                     ['label' => 'Kelas', 'url' => ['/kelas'], 'icon' => 'sign-in-alt'],
