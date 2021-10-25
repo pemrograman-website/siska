@@ -2,6 +2,9 @@
 
 use yii\helpers\Url;
 
+use kartik\grid\GridView;
+use backend\models\Fakultas;
+
 return [
     [
         'class' => 'kartik\grid\CheckboxColumn',
@@ -23,6 +26,16 @@ return [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'fakultas_id',
         'value' => 'fakultas.nama',
+        'label' => 'Fakultas',
+        'filterType' => GridView::FILTER_SELECT2,
+        'filter' => Fakultas::fakultasList(),
+        'filterWidgetOptions' => [
+            'pluginOptions' => ['allowClear' => true],
+            'hideSearch' => true,
+            'size' => 'sm',
+        ],
+        'filterInputOptions' => ['placeholder' => 'Pilih...']
+
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
