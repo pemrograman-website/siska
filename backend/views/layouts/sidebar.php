@@ -57,6 +57,7 @@
                     ['label' => 'Gedung',  'icon' => 'file-code', 'url' => ['/gedung']],
                     ['label' => 'Mahasiswa', 'url' => ['/mahasiswa'], 'icon' => 'sign-in-alt'],
                     ['label' => 'Dosen', 'url' => ['/dosen'], 'icon' => 'sign-in-alt'],
+                    ['label' => 'Kelas', 'url' => ['/kelas'], 'icon' => 'sign-in-alt'],
 
 
                     ['label' => 'MAHASISWA', 'header' => true],
@@ -68,6 +69,7 @@
                     ['label' => 'DOSEN', 'header' => true],
                     ['label' => 'Ubah Profil', 'url' => ['site/login'], 'icon' => 'sign-in-alt'],
                     ['label' => 'Lihat Kelas', 'url' => ['site/login'], 'icon' => 'sign-in-alt'],
+                    ['label' => 'Kegiatan Belajar Mengajar', 'url' => ['/kbm'], 'icon' => 'sign-in-alt'],
 
                     // ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
                     // ['label' => 'Level1'],
