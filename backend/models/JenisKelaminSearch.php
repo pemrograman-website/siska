@@ -5,6 +5,9 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+
+// models
 use backend\models\JenisKelamin;
 
 /**
@@ -62,5 +65,13 @@ class JenisKelaminSearch extends JenisKelamin
         $query->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
+    }
+
+    // Mengembalikan daftar jenis kelamin untuk Select2
+    public static function list()
+    {
+        $list = JenisKelamin::find()->all();
+
+        return ArrayHelper::map($list, 'id', 'nama');
     }
 }

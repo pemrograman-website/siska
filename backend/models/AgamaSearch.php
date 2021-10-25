@@ -5,6 +5,9 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+
+// models
 use backend\models\Agama;
 
 /**
@@ -62,5 +65,13 @@ class AgamaSearch extends Agama
         $query->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
+    }
+
+    // Mengembalikan daftar agama untuk Select2
+    public static function list()
+    {
+        $list = Agama::find()->all();
+
+        return ArrayHelper::map($list, 'id', 'nama');
     }
 }

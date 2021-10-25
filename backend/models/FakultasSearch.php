@@ -71,7 +71,7 @@ class FakultasSearch extends Fakultas
     // Mengembalikan daftar fakultas untuk Select2
     public static function fakultasList()
     {
-        $query = new Query;
+        $query = new Query;         // Query Builder 
 
         $query->from('fakultas');
         $query->orderBy([

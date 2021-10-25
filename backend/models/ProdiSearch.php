@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 
 // models
 use backend\models\Prodi;
@@ -66,5 +67,13 @@ class ProdiSearch extends Prodi
             ->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
+    }
+
+    // Mengembalikan daftar prodi untuk Select2
+    public static function list()
+    {
+        $list = Prodi::find()->all();
+
+        return ArrayHelper::map($list, 'prodi_id', 'nama');
     }
 }
