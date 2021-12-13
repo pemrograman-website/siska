@@ -25,7 +25,7 @@ use Yii;
  * @property int|null $status_id
  * @property int|null $universitas_id
  * @property string|null $fakultas
- * @property string|null $prodi
+ * @property string|null $prodi_asal
  * @property string|null $foto_src
  * @property string $foto_web
  * @property int $user_id
@@ -46,13 +46,13 @@ class Dosen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis_kelamin_id', 'homebase_id', 'pendidikan_id', 'status_id', 'universitas_id', 'user_id'], 'integer'],
+            [['jenis_kelamin_id', 'homebase_id', 'pendidikan_id', 'status_id', 'universitas_id', 'user_id', 'agama_id'], 'integer'],
             [['tgl_lahir'], 'safe'],
             [['user_id'], 'required'],
             [['nidn_nip'], 'string', 'max' => 10],
             [['nama_lengkap'], 'string', 'max' => 50],
             [['tmp_lahir'], 'string', 'max' => 30],
-            [['agama_id', 'fakultas', 'prodi'], 'string', 'max' => 45],
+            [['fakultas_asal', 'prodi_asal'], 'string', 'max' => 45],
             [['no_hp'], 'string', 'max' => 15],
             [['alamat', 'foto_src'], 'string', 'max' => 100],
             [['prov_id'], 'string', 'max' => 2],
@@ -85,9 +85,9 @@ class Dosen extends \yii\db\ActiveRecord
             'kel_id' => 'Kelurahan',
             'pendidikan_id' => 'Pendidikan Terakhir',
             'status_id' => 'Status Dosen',
-            'universitas_id' => 'Universitas',
-            'fakultas' => 'Fakultas',
-            'prodi' => 'Program Studi',
+            'universitas_id' => 'Universitas Asal',
+            'fakultas_asal' => 'Fakultas Asal',
+            'prodi_asal' => 'Program Studi Asal',
             'foto_src' => 'Foto Src',
             'foto_web' => 'Foto Web',
             'user_id' => 'User ID',

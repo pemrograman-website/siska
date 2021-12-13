@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\bootstrap4\ActiveForm;
 
 // kartik widgets
@@ -23,6 +25,8 @@ use backend\models\WilayahSearch;
 ?>
 
 <div class="dosen-form">
+    <?php var_dump(Html::getInputId($model, 'prov_id'));
+    ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -96,11 +100,72 @@ use backend\models\WilayahSearch;
     ]);
     ?>
 
-    <?= $form->field($model, 'kab_id')->textInput(['maxlength' => true]) ?>
+    <!-- Dependent Dropdown untuk Kab, Kec, dan Kel -->
+    <?php
+    $kabupatenList = [];
+    if (isset($model->prov_id)) {
+        $kabupatenList = ArrayHelper::map(WilayahSearch::kabupatenList($model->prov_id), 'kode', 'nama');
+    }
 
-    <?= $form->field($model, 'kec_id')->textInput(['maxlength' => true]) ?>
+    echo $form->field($model, 'kab_id')->widget(DepDrop::class, [
+        'data' => $kabupatenList,
+        'options' => ['placeholder' => 'Pilih kabupaten...'],
+        'type' => DepDrop::TYPE_SELECT2,
+        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+        'pluginOptions' => [
+            'depends' => [
+                Html::getInputId($model, 'prov_id')
+            ],
+            'url' => Url::to(['wilayah/kabupaten']),             // ajax
+            'loadingText' => 'Memuat kab/kota...',
+        ]
+    ]);
 
-    <?= $form->field($model, 'kel_id')->textInput(['maxlength' => true]) ?>
+    $kecamatanList = [];
+    if (isset($model->kab_id)) {
+        $kecamatanList = ArrayHelper::map(WilayahSearch::kecamatanList($model->kab_id), 'kode', 'nama');
+    }
+
+    echo $form->field($model, 'kec_id')->widget(DepDrop::class, [
+        'data' => $kecamatanList,
+        'options' => ['placeholder' => 'Pilih kecamatan...'],
+        'type' => DepDrop::TYPE_SELECT2,
+        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+        'pluginOptions' => [
+            'depends' => [
+                Html::getInputId($model, 'prov_id'),
+                Html::getInputId($model, 'kab_id')
+            ],
+            'url' => Url::to(['wilayah/kecamatan']),             // ajax
+            'loadingText' => 'Memuat kecamatan...',
+        ]
+    ]);
+
+    $kelurahanList = [];
+    if (isset($model->_id)) {
+        $kelurahanList = ArrayHelper::map(WilayahSearch::kelurahanList($model->prov_id), 'kode', 'nama');
+    }
+
+    echo $form->field($model, 'kel_id')->widget(DepDrop::class, [
+        'data' => $kelurahanList,
+        'options' => ['placeholder' => 'Pilih kelurahan..'],
+        'type' => DepDrop::TYPE_SELECT2,
+        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+        'pluginOptions' => [
+            'depends' => [
+                Html::getInputId($model, 'prov_id'),
+                Html::getInputId($model, 'kab_id'),
+                Html::getInputId($model, 'kec_id')
+            ],
+            'initialize' => true,
+            'initDepends' => [
+                Html::getInputId($model, 'prov_id')
+            ],
+            'url' => Url::to(['wilayah/kelurahan']),             // ajax
+            'loadingText' => 'Memuat kelurahan...',
+        ]
+    ]);
+    ?>
 
     <?php
     echo $form->field($model, 'pendidikan_id')->widget(Select2::class, [

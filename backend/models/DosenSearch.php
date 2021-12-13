@@ -19,7 +19,7 @@ class DosenSearch extends Dosen
     {
         return [
             [['id', 'homebase_id', 'status_id', 'universitas_id', 'user_id'], 'integer'],
-            [['nidn_nip', 'nama_lengkap', 'jenis_kelamin_id', 'tmp_lahir', 'tgl_lahir', 'agama_id', 'no_hp', 'alamat', 'prov_id', 'kab_id', 'kec_id', 'kel_id', 'pendidikan_id', 'fakultas', 'prodi', 'foto_src', 'foto_web'], 'safe'],
+            [['nidn_nip', 'nama_lengkap', 'jenis_kelamin_id', 'tmp_lahir', 'tgl_lahir', 'agama_id', 'no_hp', 'alamat', 'prov_id', 'kab_id', 'kec_id', 'kel_id', 'pendidikan_id', 'fakultas', 'prodi_asal', 'foto_src', 'foto_web'], 'safe'],
         ];
     }
 
@@ -76,8 +76,8 @@ class DosenSearch extends Dosen
             ->andFilterWhere(['like', 'kec_id', $this->kec_id])
             ->andFilterWhere(['like', 'kel_id', $this->kel_id])
             ->andFilterWhere(['like', 'pendidikan_id', $this->pendidikan_id])
-            ->andFilterWhere(['like', 'fakultas', $this->fakultas])
-            ->andFilterWhere(['like', 'prodi', $this->prodi])
+            ->andFilterWhere(['like', 'fakultas_asal', $this->fakultas_asal])
+            ->andFilterWhere(['like', 'prodi_asal', $this->prodi_asal])
             ->andFilterWhere(['like', 'foto_src', $this->foto_src])
             ->andFilterWhere(['like', 'foto_web', $this->foto_web]);
 
