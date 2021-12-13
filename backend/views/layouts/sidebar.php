@@ -62,6 +62,7 @@
                             ['label' => 'Agama',  'icon' => 'file-code', 'url' => ['/agama']],
                             ['label' => 'Pendidikan Terakhir',  'icon' => 'file-code', 'url' => ['/pendidikan-terakhir']],
                             ['label' => 'Gedung',  'icon' => 'file-code', 'url' => ['/gedung']],
+                            ['label' => 'Wilayah',  'icon' => 'file-code', 'url' => ['/wilayah']],
 
 
                         ]
