@@ -6,6 +6,7 @@ use yii\bootstrap4\ActiveForm;
 // kartik widgets
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
+use kartik\depdrop\DepDrop;
 
 // models
 use backend\models\JenisKelaminSearch;
@@ -14,6 +15,7 @@ use backend\models\ProdiSearch;
 use backend\models\PendidikanTerakhirSearch;
 use backend\models\StatusDosenSearch;
 use backend\models\UniversitasSearch;
+use backend\models\WilayahSearch;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Dosen */
@@ -81,7 +83,18 @@ use backend\models\UniversitasSearch;
 
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'prov_id')->textInput(['maxlength' => true]) ?>
+    <!-- Dropdown provinsi -->
+    <?php
+    echo $form->field($model, 'prov_id')->widget(Select2::class, [
+        'data' => WilayahSearch::provinsiList(),
+        'options' => ['placeholder' => 'Pilih provinsi...'],
+        'hideSearch' => false,
+        'pluginOptions' => [
+            'allowClear' => true,
+
+        ],
+    ]);
+    ?>
 
     <?= $form->field($model, 'kab_id')->textInput(['maxlength' => true]) ?>
 
@@ -125,9 +138,9 @@ use backend\models\UniversitasSearch;
     ]);
     ?>
 
-    <?= $form->field($model, 'fakultas')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fakultas_asal')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'prodi')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'prodi_asal')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'foto_src')->textInput(['maxlength' => true]) ?>
 
