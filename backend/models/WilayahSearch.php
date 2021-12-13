@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use backend\models\Wilayah;
 
 /**
@@ -58,5 +59,19 @@ class WilayahSearch extends Wilayah
             ->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
+    }
+
+    /*
+        Fungsi untuk menampilkan daftar provinsi untuk dropdown    
+    */
+
+    public static function provinsiList()
+    {
+
+        $sql = 'SELECT * FROM wilayah WHERE CHAR_LENGTH(kode)=2';
+
+        $list = Wilayah::findBySql($sql)->all();
+
+        return ArrayHelper::map($list, 'kode', 'nama');
     }
 }
