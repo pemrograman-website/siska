@@ -21,7 +21,7 @@ class ProdiSearch extends Prodi
     public function rules()
     {
         return [
-            [['prodi_id', 'fakultas_id'], 'integer'],
+            [['id', 'fakultas_id'], 'integer'],
             [['kode', 'nama'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class ProdiSearch extends Prodi
         }
 
         $query->andFilterWhere([
-            'prodi_id' => $this->prodi_id,
+            'id' => $this->id,
             'fakultas_id' => $this->fakultas_id,
         ]);
 
@@ -74,6 +74,6 @@ class ProdiSearch extends Prodi
     {
         $list = Prodi::find()->all();
 
-        return ArrayHelper::map($list, 'prodi_id', 'nama');
+        return ArrayHelper::map($list, 'id', 'nama');
     }
 }
