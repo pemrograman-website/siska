@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\web\UploadedFile;       // Kelas untuk unggah berkas
 
 /**
  * This is the model class for table "dosen".
@@ -32,6 +33,10 @@ use Yii;
  */
 class Dosen extends \yii\db\ActiveRecord
 {
+
+    // atribut kontainer untuk menampung isi file foto
+    public $foto_image;
+
     /**
      * {@inheritdoc}
      */
@@ -60,6 +65,9 @@ class Dosen extends \yii\db\ActiveRecord
             [['kec_id'], 'string', 'max' => 8],
             [['kel_id'], 'string', 'max' => 13],
             [['foto_web'], 'string', 'max' => 255],
+
+            // Rule untuk foto_image
+            [['foto_image'], 'image', 'extensions' => 'jpg,jpeg', 'maxSize' => 200 * 1024],
         ];
     }
 
@@ -91,6 +99,7 @@ class Dosen extends \yii\db\ActiveRecord
             'foto_src' => 'Foto Src',
             'foto_web' => 'Foto Web',
             'user_id' => 'User ID',
+            'foto_image' => 'Pas Foto',
         ];
     }
 
@@ -112,5 +121,63 @@ class Dosen extends \yii\db\ActiveRecord
         $this->tgl_lahir = date('d-m-Y', $this->tgl_lahir);
 
         parent::afterFind();
+    }
+
+    // Mengambil file gambar sesuai alamat di media penyimpanan
+    public function getFotoWeb()
+    {
+        return !empty($this->foto_web) ? Yii::$app->params['imagePath'] . '/' . $this->foto_web : null;
+    }
+
+    // Mengambil URL untuk menampilkan di web browser
+    public function getFotoUrl()
+    {
+        $foto = !empty($this->foto_web) ? $this->foto_web : null;
+        return Yii::$app->params['imageUrl'] . $foto;
+    }
+
+    public function uploadFotoImage()
+    {
+        // get the uploaded file instance. for multiple file uploads
+        // the following data will return an array (you may need to use
+        // getInstances method)
+        $fotoImage = UploadedFile::getInstance($this, 'foto_image');
+
+        // if no image was uploaded abort the upload
+        if (empty($fotoImage)) {
+            return false;
+        }
+
+        // simpan nama file yang asli
+        $this->foto_src = $fotoImage->name;
+        $tmp = explode(".", $fotoImage->name);  // 'pasfoto.jpg' => $tmp = ['pasfoto','jpg']
+        $ext = end($tmp);
+
+        // membuat nama file yang unik menggunakan teks acak (ini file yang akan diakses pada web)
+        $this->foto_web = 'dsn_' . Yii::$app->security->generateRandomString(16) . ".{$ext}";
+
+        // the uploaded image instance
+        return $fotoImage;
+    }
+
+    public function deleteFotoWeb()
+    {
+        $file = $this->getFotoWeb();
+
+        // check if file exists on server
+        if (empty($file) || !file_exists($file)) {
+            return false;
+        }
+
+        // check if uploaded file can be deleted on server
+        if (!unlink($file)) {
+            return false;
+        }
+
+        // if deletion successful, reset your file attributes
+        $this->foto_src = null;
+        $this->foto_web = null;
+
+        return true;
     }
 }

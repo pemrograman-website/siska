@@ -9,6 +9,7 @@ use yii\bootstrap4\ActiveForm;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
 use kartik\depdrop\DepDrop;
+use kartik\widgets\FileInput;
 
 // models
 use backend\models\JenisKelaminSearch;
@@ -25,8 +26,6 @@ use backend\models\WilayahSearch;
 ?>
 
 <div class="dosen-form">
-    <?php var_dump(Html::getInputId($model, 'prov_id'));
-    ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -57,6 +56,65 @@ use backend\models\WilayahSearch;
             'format' => 'dd-mm-yyyy'
         ],
     ])
+    ?>
+
+    <?php
+    if (empty($model->foto_web)) {
+        // Jika sebelumnya berkas foto belum pernah diunggah
+        $fieldSetting = [
+            'options' => [
+                'accept' => 'image/jpg',
+                'multiple' => false,
+            ],
+            'pluginOptions' => [
+                'initialPreviewShowDelete' => false,
+                'allowedFileExtensions' => ['jpg', 'jpeg'],
+                'maxFileSize' => 200, // in kB
+                'showRemove' => false,
+                'showUpload' => false,
+                'showCancel' => false,
+                'browseLabel' => 'Pilih Berkas',
+                'removeLabel' => 'Hapus',
+                'removeClass' => 'btn btn-danger'
+            ],
+        ];
+    } else {
+
+        // var_dump('dieksekusi');
+        // die();
+        // Jika berkas foto sudah pernah diunggah
+        // $fotoPreview = Yii::getAlias('@web/uploads/img/') . $model->foto_web;
+        $fotoPreview = Yii::$app->params['imageUrl'] . $model->foto_web;
+        var_dump($fotoPreview);
+        $fotoFilename = [
+            'caption' => $model->foto_src,
+            'showRemove' => false,
+        ];
+
+        $fieldSetting = [
+            'options' => [
+                'accept' => 'image/jpg',
+                'multiple' => false,
+            ],
+            'pluginOptions' => [
+                'initialPreview' => $fotoPreview,
+                'initialPreviewAsData' => true,
+                'initialPreviewConfig' => $fotoFilename,
+                'initialPreviewShowDelete' => false,
+                'allowedFileExtensions' => ['jpg', 'jpeg'],
+                'maxFileSize' => 200, // in kB
+                'showRemove' => false,
+                'showUpload' => false,
+                'showCancel' => false,
+                'browseLabel' => 'Pilih Berkas',
+                'removeLabel' => 'Hapus',
+                'removeClass' => 'btn btn-danger'
+            ],
+
+        ];
+    }
+
+    echo $form->field($model, 'foto_image')->widget(FileInput::class, $fieldSetting);
     ?>
 
     <?php
