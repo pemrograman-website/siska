@@ -68,8 +68,10 @@ CrudAsset::register($this);
         ]) ?>
     </div>
 </div>
+
 <?php Modal::begin([
     "id" => "ajaxCrudModal",
+    "size" => "modal-lg",       // -lg for large, -xl for xtralarge, default -md
     "footer" => "", // always need it for jquery plugin
     "clientOptions" => [
         "tabindex" => false,
@@ -80,4 +82,5 @@ CrudAsset::register($this);
         "tabindex" => false
     ]
 ]) ?>
+
 <?php Modal::end(); ?>

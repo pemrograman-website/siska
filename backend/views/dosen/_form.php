@@ -265,10 +265,6 @@ use backend\models\WilayahSearch;
 
     <?= $form->field($model, 'prodi_asal')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'foto_src')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'foto_web')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'user_id')->textInput() ?>
 
 

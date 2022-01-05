@@ -196,12 +196,12 @@ class DosenController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => Yii::t('yii2-ajaxcrud', 'Create New') . " Dosen",
-                    'content' => $this->renderAjax('create', [
+                    'title' => Yii::t('yii2-ajaxcrud', 'Update') . " Dosen : " . $model->nama_lengkap,
+                    'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
                     'footer' => Html::button(Yii::t('yii2-ajaxcrud', 'Close'), ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
-                        Html::button(Yii::t('yii2-ajaxcrud', 'Create'), ['class' => 'btn btn-primary', 'type' => "submit"])
+                        Html::button(Yii::t('yii2-ajaxcrud', 'Save'), ['class' => 'btn btn-primary', 'type' => "submit"])
 
                 ];
             } else if ($model->load($request->post())) {
@@ -229,25 +229,26 @@ class DosenController extends Controller
                         // Error jika foto tdk bs diupload
                     }
 
-
+                    // Jika validasi berhasil dan data berhasil disimpan
                     return [
                         'forceReload' => '#crud-datatable-pjax',
-                        'title' => Yii::t('yii2-ajaxcrud', 'Create New') . " Dosen",
-                        'content' => '<span class="text-success">' . Yii::t('yii2-ajaxcrud', 'Create') . ' Dosen ' . Yii::t('yii2-ajaxcrud', 'Success') . '</span>',
+                        'title' => "Dosen #" . $id,
+                        'content' => $this->renderAjax('view', [
+                            'model' => $model,
+                        ]),
                         'footer' => Html::button(Yii::t('yii2-ajaxcrud', 'Close'), ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
-                            Html::a(Yii::t('yii2-ajaxcrud', 'Create More'), ['create'], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
-
+                            Html::a(Yii::t('yii2-ajaxcrud', 'Update'), ['update', 'id' => $id], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
                     ];
                 }
 
+                // Jika validasi gagal dan tidak bisa disimpan
                 return [
-                    'title' => Yii::t('yii2-ajaxcrud', 'Create New') . " Dosen",
-                    'content' => $this->renderAjax('create', [
+                    'title' => Yii::t('yii2-ajaxcrud', 'Update') . " Dosen : " . $model->nama_lengkap,
+                    'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
                     'footer' => Html::button(Yii::t('yii2-ajaxcrud', 'Close'), ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
                         Html::button(Yii::t('yii2-ajaxcrud', 'Save'), ['class' => 'btn btn-primary', 'type' => "submit"])
-
                 ];
             }
         } else {
@@ -274,9 +275,10 @@ class DosenController extends Controller
                     } else {
                         // Error jika foto tdk bs diupload
                     }
+                    return $this->redirect(['index']);
                 }
             } else {
-                return $this->render('create', [
+                return $this->render('update', [
                     'model' => $model,
                 ]);
             }
